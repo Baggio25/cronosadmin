@@ -6,7 +6,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.baggio.projeto.cronosadminapi.entities.Bank;
+import com.baggio.projeto.cronosadminapi.services.validation.BankValid;
 
+@BankValid
 public class BankDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
