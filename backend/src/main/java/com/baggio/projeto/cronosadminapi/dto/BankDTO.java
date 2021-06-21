@@ -2,6 +2,9 @@ package com.baggio.projeto.cronosadminapi.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.baggio.projeto.cronosadminapi.entities.Bank;
 
 public class BankDTO implements Serializable{
@@ -9,7 +12,13 @@ public class BankDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	
+	@Size(min = 5, max = 60, message = "Deve ter entre 5 e 60 caracteres")
+	@NotBlank(message = "Campo obrigatório")
 	private String name;
+	
+	@Size(min = 3, max = 3, message = "Deve ter 3 caracteres. Ex.: 001, 123")
+	@NotBlank(message = "Campo obrigatório")
 	private String number;
 	
 	public BankDTO() {
@@ -51,5 +60,6 @@ public class BankDTO implements Serializable{
 	public void setNumber(String number) {
 		this.number = number;
 	}
+
 	
 }

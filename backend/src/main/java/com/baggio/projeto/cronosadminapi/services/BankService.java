@@ -15,16 +15,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baggio.projeto.cronosadminapi.dto.BankDTO;
-import com.baggio.projeto.cronosadminapi.dto.BankInsertDTO;
-import com.baggio.projeto.cronosadminapi.dto.BankUpdateDTO;
 import com.baggio.projeto.cronosadminapi.entities.Bank;
 import com.baggio.projeto.cronosadminapi.repositories.BankRepository;
-import com.baggio.projeto.cronosadminapi.services.generic.GenericService;
+import com.baggio.projeto.cronosadminapi.services.impl.BankServiceImpl;
 import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class BankService implements GenericService<Bank, BankDTO, BankInsertDTO, BankUpdateDTO, Long> {
+public class BankService implements BankServiceImpl {
 
 	@Autowired
 	private BankRepository repository;
@@ -36,6 +34,13 @@ public class BankService implements GenericService<Bank, BankDTO, BankInsertDTO,
 		return list.map(bank -> new BankDTO(bank));
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Page<BankDTO> findByNamePaged(String name, Pageable pageable) {
+		Page<Bank> list = repository.findByName(name, pageable);
+		return list.map(bank -> new BankDTO(bank));
+	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public BankDTO findById(Long id) {
@@ -65,19 +70,21 @@ public class BankService implements GenericService<Bank, BankDTO, BankInsertDTO,
 
 	@Override
 	@Transactional
-	public BankDTO insert(BankInsertDTO dto) {
+	public BankDTO insert(BankDTO dto) {
 		Bank bank = new Bank();
-		dtoToEntityInsert(dto, bank);
+		bank.setName(dto.getName());
+		bank.setNumber(dto.getNumber());
 		bank = repository.save(bank);
 		return new BankDTO(bank);
 	}
 
 	@Override
 	@Transactional
-	public BankDTO update(Long id, BankUpdateDTO dto) {
+	public BankDTO update(Long id, BankDTO dto) {
 		try {
 			Bank bank = repository.getOne(id);
-			dtoToEntityUpdate(dto, bank);
+			bank.setName(dto.getName());
+			bank.setNumber(dto.getNumber());
 			bank = repository.save(bank);
 			return new BankDTO(bank);
 		} catch (EntityNotFoundException e) {
@@ -86,13 +93,5 @@ public class BankService implements GenericService<Bank, BankDTO, BankInsertDTO,
 
 	}
 
-	private void dtoToEntityInsert(BankInsertDTO dto, Bank entity) {
-		entity.setName(dto.getName());
-		entity.setNumber(dto.getNumber());
-	}
-
-	private void dtoToEntityUpdate(BankUpdateDTO dto, Bank entity) {
-		entity.setName(dto.getName());
-		entity.setNumber(dto.getNumber());
-	}
+	
 }

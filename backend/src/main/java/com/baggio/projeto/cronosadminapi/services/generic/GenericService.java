@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface GenericService<T, DTO, InsertDTO, UpdateDTO, ID> {
+public interface GenericService<T, DTO, ID> {
 
 	
 	Page<DTO> findAllPaged(Pageable pageable); 
@@ -16,8 +16,8 @@ public interface GenericService<T, DTO, InsertDTO, UpdateDTO, ID> {
 	
 	void delete(ID id);
 	
-	DTO insert(InsertDTO dto);
+	DTO insert(DTO dto);
 
-	DTO update(Long id, UpdateDTO dto);
+	DTO update(Long id, DTO dto);
 	
 }
