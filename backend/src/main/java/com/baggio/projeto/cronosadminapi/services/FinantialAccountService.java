@@ -18,7 +18,7 @@ import com.baggio.projeto.cronosadminapi.dto.FinantialAccountDTO;
 import com.baggio.projeto.cronosadminapi.entities.Bank;
 import com.baggio.projeto.cronosadminapi.entities.FinantialAccount;
 import com.baggio.projeto.cronosadminapi.repositories.BankRepository;
-import com.baggio.projeto.cronosadminapi.repositories.FinancialAccountRepository;
+import com.baggio.projeto.cronosadminapi.repositories.FinantialAccountRepository;
 import com.baggio.projeto.cronosadminapi.services.exceptions.DatabaseException;
 import com.baggio.projeto.cronosadminapi.services.exceptions.ResourceNotFoundException;
 import com.baggio.projeto.cronosadminapi.services.impl.FinantialAccountServiceImpl;
@@ -27,7 +27,7 @@ import com.baggio.projeto.cronosadminapi.services.impl.FinantialAccountServiceIm
 public class FinantialAccountService implements FinantialAccountServiceImpl {
 
 	@Autowired
-	private FinancialAccountRepository repository;
+	private FinantialAccountRepository repository;
 
 	@Autowired
 	private BankRepository bankRepository;

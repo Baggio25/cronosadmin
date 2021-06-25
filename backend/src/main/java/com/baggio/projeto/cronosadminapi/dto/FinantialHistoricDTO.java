@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.baggio.projeto.cronosadminapi.entities.FinantialHistoric;
+import com.baggio.projeto.cronosadminapi.entities.enums.Operation;
 
 public class FinantialHistoricDTO implements Serializable{
 
@@ -19,7 +20,7 @@ public class FinantialHistoricDTO implements Serializable{
 	private String description;
 	
 	@NotNull(message = "Campo obrigatório")
-	private String operation;
+	private Operation operation;
 	
 	private boolean active;
 	
@@ -30,7 +31,7 @@ public class FinantialHistoricDTO implements Serializable{
 
 	}
 
-	public FinantialHistoricDTO(Long id, String description, String operation, boolean active, Long accountId) {
+	public FinantialHistoricDTO(Long id, String description, Operation operation, boolean active, Long accountId) {
 		this.id = id;
 		this.description = description;
 		this.operation = operation;
@@ -41,7 +42,7 @@ public class FinantialHistoricDTO implements Serializable{
 	public FinantialHistoricDTO(FinantialHistoric entity) {
 		id = entity.getId();
 		description = entity.getDescription();
-		operation = entity.getOperation().name().toString();
+		operation = entity.getOperation();
 		active = entity.isActive();
 		accountId = entity.getAccount().getId();
 	}
@@ -62,11 +63,11 @@ public class FinantialHistoricDTO implements Serializable{
 		this.description = description;
 	}
 
-	public String getOperation() {
+	public Operation getOperation() {
 		return operation;
 	}
 
-	public void setOperation(String operation) {
+	public void setOperation(Operation operation) {
 		this.operation = operation;
 	}
 

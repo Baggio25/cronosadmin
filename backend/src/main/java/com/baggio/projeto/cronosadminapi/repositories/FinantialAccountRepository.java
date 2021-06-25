@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.baggio.projeto.cronosadminapi.entities.FinantialAccount;
 
 @Repository
-public interface FinancialAccountRepository extends JpaRepository<FinantialAccount, Long> {
+public interface FinantialAccountRepository extends JpaRepository<FinantialAccount, Long> {
 	
 	@Query("SELECT obj FROM FinantialAccount obj "
 			+ "WHERE LOWER(obj.description) LIKE LOWER(CONCAT('%',:description,'%')) ")
