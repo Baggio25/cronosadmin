@@ -2,6 +2,7 @@ package com.baggio.projeto.cronosadminapi.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_financialaccount")
-public class FinancialAccount implements Serializable{
+@Table(name = "tb_financial_account")
+public class FinantialAccount implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,16 +27,19 @@ public class FinancialAccount implements Serializable{
 	private String number;
 	private String digit;
 	private String agency;
+	
+	@Column(name = "digit_agency")
 	private String digitAgency;
 	
 	@ManyToOne
 	@JoinColumn(name = "bank_id")
 	private Bank bankEntity;
 	
-	public FinancialAccount() {
+	
+	public FinantialAccount() {
 	}
 
-	public FinancialAccount(Long id, String description, Double balance, boolean bank, String number, String digit,
+	public FinantialAccount(Long id, String description, Double balance, boolean bank, String number, String digit,
 			String agency, String digitAgency, Bank bankEntity) {
 		this.id = id;
 		this.description = description;
@@ -136,7 +140,7 @@ public class FinancialAccount implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FinancialAccount other = (FinancialAccount) obj;
+		FinantialAccount other = (FinantialAccount) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -24,7 +24,7 @@ public class Bank implements Serializable{
 	private String number;
 	
 	@OneToMany(mappedBy = "bank")
-	private List<FinancialAccount> accounts = new ArrayList<>();
+	private List<FinantialAccount> accounts = new ArrayList<>();
 	
 	public Bank() {
 	}
@@ -59,7 +59,7 @@ public class Bank implements Serializable{
 		this.number = number;
 	}
 	
-	public List<FinancialAccount> getAccounts() {
+	public List<FinantialAccount> getAccounts() {
 		return accounts;
 	}
 

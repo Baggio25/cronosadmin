@@ -17,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.baggio.projeto.cronosadminapi.dto.BankDTO;
 import com.baggio.projeto.cronosadminapi.entities.Bank;
 import com.baggio.projeto.cronosadminapi.repositories.BankRepository;
+import com.baggio.projeto.cronosadminapi.services.exceptions.DatabaseException;
+import com.baggio.projeto.cronosadminapi.services.exceptions.ResourceNotFoundException;
 import com.baggio.projeto.cronosadminapi.services.impl.BankServiceImpl;
-import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
-import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class BankService implements BankServiceImpl {
@@ -30,8 +30,8 @@ public class BankService implements BankServiceImpl {
 	@Override
 	@Transactional(readOnly = true)
 	public Page<BankDTO> findAllPaged(Pageable pageable) {
-		Page<Bank> list = repository.findAll(pageable);
-		return list.map(bank -> new BankDTO(bank));
+		Page<Bank> page = repository.findAll(pageable);
+		return page.map(bank -> new BankDTO(bank));
 	}
 
 	@Override
