@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.NotBlank;
+
 import com.baggio.projeto.cronosadminapi.entities.FinantialMovement;
 import com.baggio.projeto.cronosadminapi.entities.Person;
 
@@ -13,8 +15,10 @@ public class PersonDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	
+	@NotBlank(message = "Campo obrigatório")
 	private String name;
-	private String cpfCnpj;
+	private String cpfCnpj; //Falta validar o CPF / CNPJ existente e se é válido
 	private String telephone;
 	private String celular;
 	private boolean active;
