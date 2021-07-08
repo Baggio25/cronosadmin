@@ -1,52 +1,46 @@
 package com.baggio.projeto.cronosadminapi.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.baggio.projeto.cronosadminapi.entities.enums.Operation;
-
 @Entity
-@Table(name = "tb_financial_historic")
-public class FinantialHistoric implements Serializable{
+@Table(name = "tb_user_group")
+public class UserGroup implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private String description;
-	
-	@Enumerated(EnumType.STRING)
-	private Operation operation;
-	
+	private String name;
 	private boolean active;
 	
-	@ManyToOne
-	@JoinColumn(name = "financial_account_id")
-	private FinantialAccount account;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_user_group_role",
+		joinColumns = @JoinColumn(name = "user_group_id"),
+		inverseJoinColumns = @JoinColumn(name = "role_id"))	
+	private Set<Role> roles = new HashSet<>();
+
+	public UserGroup() {
+	}
 	
-	public FinantialHistoric() {
-
-	}
-
-	public FinantialHistoric(Long id, String description, Operation operation, boolean active,
-			FinantialAccount account) {
+	public UserGroup(Long id, String name, boolean active) {
 		this.id = id;
-		this.description = description;
-		this.operation = operation;
+		this.name = name;
 		this.active = active;
-		this.account = account;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -56,20 +50,12 @@ public class FinantialHistoric implements Serializable{
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getName() {
+		return name;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Operation getOperation() {
-		return operation;
-	}
-
-	public void setOperation(Operation operation) {
-		this.operation = operation;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public boolean isActive() {
@@ -80,12 +66,8 @@ public class FinantialHistoric implements Serializable{
 		this.active = active;
 	}
 
-	public FinantialAccount getAccount() {
-		return account;
-	}
-
-	public void setAccount(FinantialAccount account) {
-		this.account = account;
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
 	@Override
@@ -104,7 +86,7 @@ public class FinantialHistoric implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FinantialHistoric other = (FinantialHistoric) obj;
+		UserGroup other = (UserGroup) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -112,5 +94,7 @@ public class FinantialHistoric implements Serializable{
 			return false;
 		return true;
 	}
-
+	
+	
+	
 }

@@ -2,9 +2,8 @@ package com.baggio.projeto.cronosadminapi.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,40 +11,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.baggio.projeto.cronosadminapi.entities.enums.Operation;
-
 @Entity
-@Table(name = "tb_financial_historic")
-public class FinantialHistoric implements Serializable{
-
+@Table(name = "tb_user")
+public class User implements Serializable{
+	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String name;
 	
-	private String description;
-	
-	@Enumerated(EnumType.STRING)
-	private Operation operation;
-	
+	@Column(unique = true)
+	private String email;
+	private String password;
 	private boolean active;
 	
 	@ManyToOne
-	@JoinColumn(name = "financial_account_id")
-	private FinantialAccount account;
-	
-	public FinantialHistoric() {
+	@JoinColumn(name = "user_group_id")
+	private UserGroup userGroup;
 
-	}
-
-	public FinantialHistoric(Long id, String description, Operation operation, boolean active,
-			FinantialAccount account) {
-		this.id = id;
-		this.description = description;
-		this.operation = operation;
-		this.active = active;
-		this.account = account;
+	public User() {
 	}
 
 	public Long getId() {
@@ -56,20 +45,28 @@ public class FinantialHistoric implements Serializable{
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getName() {
+		return name;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Operation getOperation() {
-		return operation;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setOperation(Operation operation) {
-		this.operation = operation;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public boolean isActive() {
@@ -80,12 +77,12 @@ public class FinantialHistoric implements Serializable{
 		this.active = active;
 	}
 
-	public FinantialAccount getAccount() {
-		return account;
+	public UserGroup getUserGroup() {
+		return userGroup;
 	}
 
-	public void setAccount(FinantialAccount account) {
-		this.account = account;
+	public void setUserGroup(UserGroup userGroup) {
+		this.userGroup = userGroup;
 	}
 
 	@Override
@@ -104,7 +101,7 @@ public class FinantialHistoric implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FinantialHistoric other = (FinantialHistoric) obj;
+		User other = (User) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
