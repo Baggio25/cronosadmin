@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.baggio.projeto.cronosadminapi.entities.enums.Origin;
+import com.baggio.projeto.cronosadminapi.entities.enums.Status;
 
 @Entity
 @Table(name="tb_finantial_movement")

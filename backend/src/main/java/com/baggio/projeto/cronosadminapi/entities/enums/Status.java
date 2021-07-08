@@ -1,4 +1,4 @@
-package com.baggio.projeto.cronosadminapi.entities;
+package com.baggio.projeto.cronosadminapi.entities.enums;
 
 public enum Status {
 	
