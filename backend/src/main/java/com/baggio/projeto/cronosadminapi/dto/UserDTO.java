@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.baggio.projeto.cronosadminapi.entities.User;
 
@@ -21,7 +22,7 @@ public class UserDTO implements Serializable{
 	private String email;
 	private boolean active;
 	
-	@NotBlank(message = "Campo obrigatório")
+	@NotNull(message = "Campo obrigatório")
 	private Long userGroupId;
 
 	public UserDTO() {
