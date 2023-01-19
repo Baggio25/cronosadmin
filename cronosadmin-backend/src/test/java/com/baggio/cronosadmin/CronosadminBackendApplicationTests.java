@@ -1,10 +1,10 @@
-package com.baggio.cronosadmin.backend;
+package com.baggio.cronosadmin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendApplicationTests {
+class CronosadminBackendApplicationTests {
 
 	@Test
 	void contextLoads() {
